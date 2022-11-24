@@ -22,7 +22,7 @@ char *ft_strchr(char *s, int c)
 	while (s[i] != '\0')
 	{
 		if(s[i] == (char)c)
-			return (s + i);
+			return (s +i);
 		i++;
 	}
 	return (0);

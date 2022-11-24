@@ -48,13 +48,13 @@ char	*get_new_str(char *str)
 char 	*get_str(int fd, char *str)
 {
 	char *buf;
-	int r_bytes; //str ta a vir aq como NULL
+	int r_bytes;
 
 	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buf)
 		return (NULL);
 	r_bytes = 1;
-	while(r_bytes != 0) //falta a cena &&...
+	while(r_bytes != 0 && !ft_strchr(str,'\n'))
 	{
 		r_bytes = read(fd,buf,BUFFER_SIZE);
 		if (r_bytes == -1)
@@ -63,7 +63,7 @@ char 	*get_str(int fd, char *str)
 			return (NULL);
 		}
 		buf[r_bytes] = '\0';
-		str = ft_strjoin(str,buf); //ARRUMA DEPOIS
+		str = ft_strjoin(str,buf);
 	}
 	free(buf);
 	return (str);
@@ -93,6 +93,5 @@ int main(void) // ver melhor o main disto
 	printf("%s\n",get_next_line(fd));
 	printf("%s\n",get_next_line(fd));
 	printf("%s\n",get_next_line(fd));
-	close(fd);
 	return 0;
 }*/
