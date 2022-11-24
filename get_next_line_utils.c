@@ -12,35 +12,48 @@ int	ft_strlen(char *s)
 
 char *ft_strchr(char *s, int c)
 {
-	while (*s != '\0' && *s != (char)c)
-		s++;
-	if (*s == (char)c)
-		return (s);
+	int i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	if (c == '\0')
+		return (&s[ft_strlen(s)]);
+	while (s[i] != '\0')
+	{
+		if(s[i] == (char)c)
+			return (s + i);
+		i++;
+	}
 	return (0);
 }
 
 char *ft_strjoin(char *s1, char *s2)
 {
-	int	i;
-	int	x;
-	int	temp;
-	char *str;
-
+	int i;
+	int k;
+	char *p;
 	if (!s1)
-		return (NULL);
-	if (!s2)
-		return (s1);
-	x = ft_strlen(s1);
-	temp = ft_strlen(s2);
-	str = malloc((x + temp + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
+	{
+		s1 = malloc(1);
+		s1[0] = '\0';
+	}
+	if(!s2 || !s1)
+		return (0);
+	p = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!p)
+		return 0;
 	i = 0;
-	while(x > i)
-		str[i++] = *s1++;
-	i = 0;
-	while(temp > i)
-		str[x + i++] = *s2++;
-	str[x + i] = '\0';
-	return (str);
+	if (s1)
+		while (s1[i] != '\0')
+		{
+			p[i] = s1[i];
+			i++;
+		}
+	k = 0;
+	while (s2[k] != '\0')
+		p[i++] = s2[k++];
+	p[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	free(s1);
+	return (p);
 }
