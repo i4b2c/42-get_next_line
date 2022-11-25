@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: icaldas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 14:26:12 by icaldas           #+#    #+#             */
-/*   Updated: 2022/11/25 14:26:13 by icaldas          ###   ########.fr       */
+/*   Created: 2022/11/25 12:35:37 by icaldas           #+#    #+#             */
+/*   Updated: 2022/11/25 12:35:39 by icaldas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_line(char *str)
 {
@@ -93,16 +93,16 @@ char	*get_str(int fd, char *str)
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str[4096];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 4095)
 		return (NULL);
-	str = get_str(fd, str);
-	if (!str)
+	str[fd] = get_str(fd, str[fd]);
+	if (!str[fd])
 		return (NULL);
-	line = get_line(str);
-	str = get_new_str(str);
+	line = get_line(str[fd]);
+	str[fd] = get_new_str(str[fd]);
 	return (line);
 }
 /*
