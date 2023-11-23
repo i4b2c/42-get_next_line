@@ -2,9 +2,9 @@
 
 ## Usage
 
-``make`` compile the functions without bonus (uncomment the main to work)
+``cc get_next_line.c get_next_line_utils.c`` compile the functions without bonus (uncomment the main to work)
 
-``make bonus`` compile all funcions (uncomment the main to work)
+``cc get_next_line_bonus.c get_next_line_utils_bonus.c`` compile all funcions (uncomment the main to work)
 
 ## Tester
 
